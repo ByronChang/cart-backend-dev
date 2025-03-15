@@ -206,7 +206,8 @@ public class CartService {
         List<CartProductResponse> products = cartItems.stream()
                 .map(cart -> new CartProductResponse(
                         new ProductResponse(cart.getProduct().getId(), cart.getProduct().getName(),
-                                cart.getProduct().getDescription(), cart.getProduct().getPrice()),
+                                cart.getProduct().getDescription(), cart.getProduct().getPrice(),
+                                cart.getProduct().getImageUrl()),
                         cart.getQuantity(),
                         cart.getAddedDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()))
                 .collect(Collectors.toList());
