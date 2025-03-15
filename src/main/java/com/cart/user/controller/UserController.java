@@ -31,23 +31,6 @@ public class UserController {
         return new UserResponse(user.getId(), user.getEmail(), user.getAddress(), user.getBirthDate());
     }
 
-    // Endpoint para registrar un nuevo usuario
-    // @PostMapping("/register")
-    // @Operation(summary = "Registrar un nuevo usuario", description = "Registra un
-    // nuevo usuario en el sistema", responses = {
-    // @ApiResponse(responseCode = "200", description = "Usuario registrado
-    // exitosamente"),
-    // @ApiResponse(responseCode = "400", description = "Fecha de nacimiento nula")
-    // })
-    // public ResponseEntity<UserResponse> registerUser(@RequestBody User user) {
-    // if (user.getBirthDate() == null) {
-    // throw new RuntimeException("La fecha de nacimiento no puede ser nula");
-    // }
-
-    // User newUser = userService.registerUser(user);
-    // return ResponseEntity.ok(buildUserResponse(newUser));
-    // }
-
     // Endpoint para actualizar un usuario existente
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar un usuario", description = "Actualiza los datos de un usuario existente", responses = {
