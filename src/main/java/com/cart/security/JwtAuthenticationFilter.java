@@ -1,4 +1,4 @@
-package com.cart.config;
+package com.cart.security;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -9,8 +9,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
-
-import com.cart.security.JwtTokenProvider;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
