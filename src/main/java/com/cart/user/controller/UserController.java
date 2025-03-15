@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,20 +29,6 @@ public class UserController {
     // Método privado para construir un UserResponse a partir de un User
     private UserResponse buildUserResponse(User user) {
         return new UserResponse(user.getId(), user.getEmail(), user.getAddress(), user.getBirthDate());
-    }
-
-    // Endpoint para registrar un nuevo usuario
-    @PostMapping("/register")
-    @Operation(summary = "Registrar un nuevo usuario", description = "Registra un nuevo usuario en el sistema", responses = {
-            @ApiResponse(responseCode = "200", description = "Usuario registrado exitosamente"),
-            @ApiResponse(responseCode = "400", description = "Fecha de nacimiento nula") })
-    public ResponseEntity<UserResponse> registerUser(@RequestBody User user) {
-        if (user.getBirthDate() == null) {
-            throw new RuntimeException("La fecha de nacimiento no puede ser nula");
-        }
-
-        User newUser = userService.registerUser(user);
-        return ResponseEntity.ok(buildUserResponse(newUser));
     }
 
     // Endpoint para actualizar un usuario existente

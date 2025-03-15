@@ -19,11 +19,13 @@ import com.cart.user.dto.UserCartResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/cart")
 @Tag(name = "Cart", description = "Endpoints para gestionar el carrito de compras")
+@SecurityRequirement(name = "Bearer Authentication")
 public class CartController {
 
     @Autowired
