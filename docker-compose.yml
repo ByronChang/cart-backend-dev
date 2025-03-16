@@ -1,4 +1,4 @@
-version: '3.8'
+
 services:
   db:
     image: mysql:8.0
@@ -13,5 +13,28 @@ services:
     volumes:
       - db_data:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - cart_network
+
+  app:
+    image: cart-app
+    container_name: cart_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/cart_db
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+    ports:
+      - "8080:8080"
+    networks:
+      - cart_network
+
 volumes:
   db_data:
+
+networks:
+  cart_network:
