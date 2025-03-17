@@ -101,8 +101,7 @@ public class CartService {
             throw new ResourceNotFoundException("Cart not found for user with id: " + userId);
         }
 
-        // Asumimos que un usuario tiene solo un carrito
-        Cart cart = userCarts.get(0);
+        Cart cart = findFirstCartByProductId(userCarts, productId);
 
         // Verificar que el producto esté en el carrito
         if (!cart.getProduct().getId().equals(productId)) {
@@ -126,48 +125,6 @@ public class CartService {
                 updatedCart.getProduct().getName(), updatedCart.getProduct().getPrice(), updatedCart.getQuantity(),
                 updatedCart.getAddedDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
     }
-
-    // public CartResponse updateCartItem(Long cartId, Long productId, int quantity)
-    // {
-    // // Validar que la cantidad sea mayor que 0
-    // if (quantity <= 0) {
-    // throw new InvalidQuantityException("Quantity must be greater than 0");
-    // }
-
-    // // Buscar el carrito por su ID
-    // Cart cart = cartRepository.findById(cartId)
-    // .orElseThrow(() -> new ResourceNotFoundException("Cart not found with id: " +
-    // cartId));
-
-    // // Verificar que el producto esté en el carrito
-    // if (!cart.getProduct().getId().equals(productId)) {
-    // throw new ResourceNotFoundException("Product not found in cart with id: " +
-    // productId);
-    // }
-
-    // // Validar que la cantidad no supere el stock disponible
-    // if (quantity > cart.getProduct().getStock()) {
-    // throw new InvalidQuantityException("Requested quantity exceeds available
-    // stock. Available stock: " + cart.getProduct().getStock());
-    // }
-
-    // // Actualizar la cantidad del producto
-    // cart.setQuantity(quantity);
-
-    // // Guardar el carrito actualizado
-    // Cart updatedCart = cartRepository.save(cart);
-
-    // // Convertir a CartResponse y devolver
-    // return new CartResponse(
-    // updatedCart.getId(),
-    // updatedCart.getUser().getId(),
-    // updatedCart.getProduct().getId(),
-    // updatedCart.getProduct().getName(),
-    // updatedCart.getProduct().getPrice(),
-    // updatedCart.getQuantity(),
-    // updatedCart.getAddedDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
-    // );
-    // }
 
     // Eliminar un producto del carrito
     public void removeFromCart(Long userId, Long productId) {
@@ -213,8 +170,17 @@ public class CartService {
                 .collect(Collectors.toList());
 
         // Crear y devolver el UserCartResponse
-        return new UserCartResponse(
-                new UserResponse(user.getId(), user.getEmail(), user.getAddress(), user.getBirthDate()), products);
+        return new UserCartResponse(new UserResponse(user.getId(), user.getEmail(), user.getAddress(),
+                user.getBirthDate(), user.getUsername()), products);
+    }
+
+    public Cart findFirstCartByProductId(List<Cart> userCarts, Long productId) {
+        for (Cart cart : userCarts) {
+            if (cart.getProduct().getId().equals(productId)) {
+                return cart;
+            }
+        }
+        return null;
     }
 
 }

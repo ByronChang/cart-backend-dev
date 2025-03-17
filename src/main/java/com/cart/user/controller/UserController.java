@@ -28,7 +28,8 @@ public class UserController {
 
     // Método privado para construir un UserResponse a partir de un User
     private UserResponse buildUserResponse(User user) {
-        return new UserResponse(user.getId(), user.getEmail(), user.getAddress(), user.getBirthDate());
+        return new UserResponse(user.getId(), user.getEmail(), user.getAddress(), user.getBirthDate(),
+                user.getUsername());
     }
 
     // Endpoint para actualizar un usuario existente

@@ -1,6 +1,8 @@
 -- Crear la base de datos (si no existe)
-CREATE DATABASE IF NOT EXISTS cart_db;
+-- Crear la base de datos (si no existe) con utf8mb4
+CREATE DATABASE IF NOT EXISTS cart_db CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 USE cart_db;
+
 -- Tabla de usuarios
 CREATE TABLE IF NOT EXISTS users (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -11,10 +13,9 @@ CREATE TABLE IF NOT EXISTS users (
     birth_date DATE NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+) CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 -- Tabla de productos
--- Crear la tabla de productos (products)
 CREATE TABLE IF NOT EXISTS products (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -24,9 +25,9 @@ CREATE TABLE IF NOT EXISTS products (
     image_url VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+) CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
--- Crear la tabla de carritos (cart)
+-- Tabla de carritos (cart)
 CREATE TABLE IF NOT EXISTS cart (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT NOT NULL,
@@ -35,9 +36,9 @@ CREATE TABLE IF NOT EXISTS cart (
     added_date TIMESTAMP NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
-);
+) CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
--- Crear la tabla de órdenes (orders)
+-- Tabla de órdenes (orders)
 CREATE TABLE IF NOT EXISTS orders (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT NOT NULL,
@@ -45,9 +46,9 @@ CREATE TABLE IF NOT EXISTS orders (
     shipping_address VARCHAR(255) NOT NULL,
     status VARCHAR(50) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
+) CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
--- Crear la tabla de detalles de órdenes (order_details)
+-- Tabla de detalles de órdenes (order_details)
 CREATE TABLE IF NOT EXISTS order_details (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     order_id BIGINT NOT NULL,
@@ -56,7 +57,7 @@ CREATE TABLE IF NOT EXISTS order_details (
     price DECIMAL(19, 2) NOT NULL,
     FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
-);
+) CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 -- Insertar datos de inicio
 INSERT INTO users (username, email, password, address, birth_date) 

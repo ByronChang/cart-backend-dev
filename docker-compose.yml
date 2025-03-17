@@ -8,6 +8,10 @@ services:
       MYSQL_DATABASE: cart_db
       MYSQL_USER: user
       MYSQL_PASSWORD: password
+      MYSQL_CHARSET: utf8mb4
+      MYSQL_COLLATION: utf8mb4_unicode_ci
+      LANG: es_ES.UTF-8
+      LC_ALL: es_ES.UTF-8
     ports:
       - "3306:3306"
     volumes:
