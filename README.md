@@ -16,17 +16,19 @@ Este es el backend de una aplicación de carrito de compras desarrollada con Spr
 git clone https://github.com/ByronChang/cart-backend-dev.git
 cd cart-backend-dev
 
+
 ### 2. Construir el proyecto
 Compila el proyecto y genera el archivo JAR:
 
 ```bash
 mvn clean package -DskipTests
-
+```
 ### 3. Configurar Docker Compose
 Asegúrate de que Docker y Docker Compose estén instalados. Luego, levanta los contenedores:
 
 ```bash
 docker-compose up --build
+```
 
 Esto levantará dos contenedores:
 
