@@ -15,7 +15,7 @@ Este es el backend de una aplicación de carrito de compras desarrollada con Spr
 ```bash
 git clone https://github.com/ByronChang/cart-backend-dev.git
 cd cart-backend-dev
-
+```
 
 ### 2. Construir el proyecto
 Compila el proyecto y genera el archivo JAR:
